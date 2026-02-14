@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+websockets
+pydantic
+RealtimeSTT
+ollama
+kokoro-onnx
+sounddevice
+numpy
+python-multipart

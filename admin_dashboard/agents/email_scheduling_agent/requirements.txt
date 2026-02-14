@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+pydantic
+aiosmtplib
+email-validator
+apscheduler
+python-dateutil
+ollama

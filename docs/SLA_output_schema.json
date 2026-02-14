@@ -1,0 +1,20 @@
+{"shortlisted": [
+    {
+        "name": "Shivam",
+        "confidence": 0.95,
+        "email": "shivam31199@gmail.com",
+        "cv_path": "/path/to/cv",
+        "skills": ["Python", "Machine Learning", "Data Analysis"],
+        "experience": 5,
+        "cover_letter": "I am excited to apply for the position of Data Scientist at your company. With 5 years of experience in Python, Machine Learning, and Data Analysis, I am confident in my ability to contribute to your team and help drive data-driven decision making."
+    },
+    {
+        "name": "Amit",
+        "confidence": 0.90,
+        "email": "amit@example.com",
+        "cv_path": "/path/to/cv",
+        "skills": ["JavaScript", "React", "Frontend Development"],
+        "experience": 3,
+        "cover_letter": "I am writing to express my interest in the Frontend Developer position at your company. With 3 years of experience in JavaScript, React, and Frontend Development, I am eager to bring my skills and passion for creating user-friendly interfaces to your team."
+    }
+]}

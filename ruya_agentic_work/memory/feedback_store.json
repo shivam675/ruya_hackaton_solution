@@ -1,0 +1,20 @@
+[
+  {
+    "query": "What is the maternity leave policy?",
+    "response": "Hello Aryan, how can I assist you today?",
+    "rating": 5,
+    "correction": "i asked a question"
+  },
+  {
+    "query": "What is the maternity leave policy?",
+    "response": "Hello Aryan, how can I assist you today?",
+    "rating": 7,
+    "correction": "7"
+  },
+  {
+    "query": "hi can i get a leave for 5 days",
+    "response": "Based on the leave policies outlined in the context for **{ORGANIZATION NAME}**, here\u2019s how you can request a **5-day leave**:\n\n### **Eligibility & Requirements**\n1. **Full-Time Employees**:\n   - You can request **up to 30 days (210 hours) of sick leave per year** (prorated for part-time).\n   - For **5 days (35 hours)**, you would need to use a combination of:\n     - **Sick leave** (if medically necessary, with doctor\u2019s note for absences \u22655 days).\n     - **Personal leave** (3 days max per year, but not available in the first 6 months).\n     - **Vacation leave** (earned gradually over time, but you\u2019d need to have accumulated enough).\n\n   Since you\u2019re asking for **5 days**, here\u2019s the breakdown:\n   - **Sick leave alone**: You\u2019d need to use **5 days (35 hours)** of sick leave (if medically justified).\n   - **Vacation leave**: You\u2019d need to have earned **at least 5 days** (e.g., 2 weeks in your first year, 3 weeks in your third year, etc.).\n   - **Personal leave**: Not enough (only 3 days max per year, and not available in first 6 months).\n\n2. **Personal Leave**:\n   - You **cannot** take personal leave in the first 6 months of employment.\n   - You\u2019d need to have completed **6+ months** to qualify, but only **3 days** are available per year.\n\n3. **Vacation Leave**:\n   - You\u2019d need to have earned **at least 5 days** (e.g., if you\u2019re in your **third year**, you\u2019d earn **15 days**\u2014enough for 5 days).\n   - Vacation leave is **earned gradually** (e.g., 10 days in Year 1, 10 in Year 2, 15 in Year 3, 20+ thereafter).\n\n### **How to Request It**\n- **Submit a leave request** (in hourly increments) via the **appropriate leave request form**.\n- **Approval** requires **supervisor + Executive Director** approval.\n- For **sick leave**, you may need a **doctor\u2019s note** if the absence is \u22655 days.\n\n### **Alternative Options**\n- If you\u2019re in your **first 6 months**, you **cannot** use personal leave yet.\n- If you\u2019re in your **first year**, you\u2019d need to use **sick leave** (if medically justified) or wait until you earn **vacation leave**.\n- If you\u2019re in your **third year**, you could request **5 days of vacation leave** (if you\u2019ve earned enough).\n\nWould you like help calculating how many days you\u2019ve earned based on your employment tenure? Let me know your **employment duration** (e.g., \"I\u2019ve worked here for 2 years\") so I can refine the answer!",
+    "rating": 5,
+    "correction": "none"
+  }
+]

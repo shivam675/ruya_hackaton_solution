@@ -1,0 +1,97 @@
+{
+  "description": "Global candidate pool for CV shortlisting agent",
+  "last_updated": "2026-02-14",
+  "total_candidates": 15,
+  "candidates": [
+    {
+      "name": "Aarav Mehta",
+      "email": "aarav.mehta.dev@gmail.com",
+      "skills": ["Python", "Go", "React", "Node.js", "Express", "SQL", "PostgreSQL", "MongoDB", "AWS", "Docker", "Git", "REST API"],
+      "experience": 3
+    },
+    {
+      "name": "Priya Nair",
+      "email": "priya.nair.dev@gmail.com",
+      "skills": ["Python", "React", "Node.js", "FastAPI", "SQL", "MongoDB", "Docker", "Git", "JavaScript"],
+      "experience": 4
+    },
+    {
+      "name": "Kabir Sharma",
+      "email": "kabir.sharma.dev@gmail.com",
+      "skills": ["Python", "Go", "React", "Node.js", "FastAPI", "Express", "MongoDB", "AWS", "Docker", "Git", "CSS"],
+      "experience": 3
+    },
+    {
+      "name": "Ananya Singh",
+      "email": "ananya.singh.tech@gmail.com",
+      "skills": ["JavaScript", "React", "Vue.js", "Node.js", "Express", "MySQL", "Git", "CSS", "HTML"],
+      "experience": 2
+    },
+    {
+      "name": "Rohan Verma",
+      "email": "rohan.verma.code@gmail.com",
+      "skills": ["Python", "Django", "Flask", "PostgreSQL", "Docker", "AWS", "Redis", "Celery"],
+      "experience": 5
+    },
+    {
+      "name": "Divya Patel",
+      "email": "divya.patel.dev@gmail.com",
+      "skills": ["JavaScript", "React", "TypeScript", "Next.js", "Tailwind CSS", "Node.js", "MongoDB"],
+      "experience": 3
+    },
+    {
+      "name": "Arjun Kumar",
+      "email": "arjun.kumar.tech@gmail.com",
+      "skills": ["Java", "Spring Boot", "Microservices", "Kubernetes", "Docker", "MySQL", "AWS"],
+      "experience": 6
+    },
+    {
+      "name": "Sneha Reddy",
+      "email": "sneha.reddy.ai@gmail.com",
+      "skills": ["Python", "Machine Learning", "TensorFlow", "PyTorch", "NLP", "Data Science", "Pandas"],
+      "experience": 4
+    },
+    {
+      "name": "Vikram Joshi",
+      "email": "vikram.joshi.dev@gmail.com",
+      "skills": ["Python", "FastAPI", "React", "PostgreSQL", "Docker", "Redis", "Celery", "AWS"],
+      "experience": 5
+    },
+    {
+      "name": "Meera Gupta",
+      "email": "meera.gupta.tech@gmail.com",
+      "skills": ["React", "TypeScript", "GraphQL", "Node.js", "MongoDB", "CSS", "HTML"],
+      "experience": 2
+    },
+    {
+      "name": "Rahul Khanna",
+      "email": "rahul.khanna.code@gmail.com",
+      "skills": ["Go", "Kubernetes", "Docker", "Microservices", "PostgreSQL", "Redis", "gRPC"],
+      "experience": 4
+    },
+    {
+      "name": "Ishita Malhotra",
+      "email": "ishita.malhotra.dev@gmail.com",
+      "skills": ["Python", "Django", "React", "PostgreSQL", "Docker", "AWS", "Git"],
+      "experience": 3
+    },
+    {
+      "name": "Aditya Rao",
+      "email": "aditya.rao.tech@gmail.com",
+      "skills": ["JavaScript", "Node.js", "Express", "MongoDB", "React", "Docker", "Git"],
+      "experience": 4
+    },
+    {
+      "name": "Kavya Menon",
+      "email": "kavya.menon.ai@gmail.com",
+      "skills": ["Python", "Data Science", "Machine Learning", "SQL", "Scikit-learn", "Matplotlib", "Pandas"],
+      "experience": 5
+    },
+    {
+      "name": "Siddharth Iyer",
+      "email": "siddharth.iyer.dev@gmail.com",
+      "skills": ["React Native", "JavaScript", "TypeScript", "MongoDB", "Node.js", "Firebase", "Git"],
+      "experience": 3
+    }
+  ]
+}

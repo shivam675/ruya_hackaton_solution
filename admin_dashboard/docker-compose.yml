@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+  # MongoDB
+  mongodb:
+    image: mongo:7.0
+    container_name: hr_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: hr_recruitment_db
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - hr_network
+
+  # Main Backend (Port 8001)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hr_backend
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017
+      - DATABASE_NAME=hr_recruitment_db
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+      - ./storage:/app/storage
+    networks:
+      - hr_network
+    command: uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+
+  # CV Shortlisting Agent (Port 8002)
+  cv_agent:
+    build:
+      context: ./agents/cv_shortlisting_agent
+      dockerfile: Dockerfile
+    container_name: hr_cv_agent
+    restart: unless-stopped
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./agents/cv_shortlisting_agent:/app
+    networks:
+      - hr_network
+    command: uvicorn main:app --host 0.0.0.0 --port 8002 --reload
+
+  # Email Scheduling Agent (Port 8003)
+  email_agent:
+    build:
+      context: ./agents/email_scheduling_agent
+      dockerfile: Dockerfile
+    container_name: hr_email_agent
+    restart: unless-stopped
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./agents/email_scheduling_agent:/app
+    networks:
+      - hr_network
+    command: uvicorn main:app --host 0.0.0.0 --port 8003 --reload
+
+  # Interview Agent (Port 8004)
+  interview_agent:
+    build:
+      context: ./agents/interview_agent
+      dockerfile: Dockerfile
+    container_name: hr_interview_agent
+    restart: unless-stopped
+    ports:
+      - "8004:8004"
+    volumes:
+      - ./agents/interview_agent:/app
+      - ./storage:/app/storage
+    networks:
+      - hr_network
+    command: uvicorn main:app --host 0.0.0.0 --port 8004 --reload
+
+  # HR Chat Agent (Port 8005)
+  hr_chat_agent:
+    build:
+      context: ./agents/hr_chat_agent
+      dockerfile: Dockerfile
+    container_name: hr_chat_agent
+    restart: unless-stopped
+    ports:
+      - "8005:8005"
+    volumes:
+      - ./agents/hr_chat_agent:/app
+    networks:
+      - hr_network
+    command: uvicorn main:app --host 0.0.0.0 --port 8005 --reload
+
+  # Frontend (Port 5173)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hr_frontend
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - hr_network
+    command: npm run dev -- --host
+
+networks:
+  hr_network:
+    driver: bridge
+
+volumes:
+  mongodb_data:

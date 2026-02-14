@@ -1,0 +1,20 @@
+# Main Backend Dependencies
+fastapi
+uvicorn[standard]
+python-jose[cryptography]
+passlib
+python-multipart
+motor  # Async MongoDB driver
+pydantic
+pydantic-settings
+python-dotenv
+pymongo
+aiosmtplib
+email-validator
+httpx  # For calling other microservices
+websockets
+
+# AI/ML Dependencies for HR Chat Agent
+chromadb>=0.4.0
+sentence-transformers
+ollama

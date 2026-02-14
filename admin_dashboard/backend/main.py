@@ -8,7 +8,8 @@ import logging
 
 from config.settings import settings
 from utils.database import Database, init_database
-from routes import auth, job_postings, candidates, interviews, learning, hr_chat, critic
+from utils.seed_sample_data import seed_sample_interview
+from routes import auth, job_postings, candidates, interviews, learning, hr_chat, critic, dev
 
 # Configure logging
 logging.basicConfig(
@@ -25,6 +26,18 @@ async def lifespan(app: FastAPI):
     logger.info("🚀 Starting HR Recruitment System Backend")
     await Database.connect_db()
     await init_database()
+    
+    # Seed sample data for testing
+    try:
+        db = Database.get_db()
+        result = await seed_sample_interview(db)
+        if result.get("success"):
+            logger.info(f"✅ Sample interview data ready: {result.get('message')}")
+            logger.info(f"   📝 Candidate: {result.get('candidate_name')}")
+            logger.info(f"   🎤 Interview ID: {result.get('interview_id')}")
+    except Exception as e:
+        logger.warning(f"⚠️  Could not seed sample data: {str(e)}")
+    
     logger.info("✅ Backend ready!")
     
     yield
@@ -59,6 +72,7 @@ app.include_router(interviews.router)
 app.include_router(learning.router)
 app.include_router(hr_chat.router)
 app.include_router(critic.router)
+app.include_router(dev.router)  # Development utilities
 
 
 @app.get("/")

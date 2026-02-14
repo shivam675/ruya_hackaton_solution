@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Calendar, Briefcase, Clock } from 'lucide-react';
 import { format } from 'date-fns';
+import SampleDataInfo from '@/components/SampleDataInfo';
 
 interface Interview {
   _id: string;
@@ -54,6 +55,9 @@ export default function Interviews() {
           <p className="text-gray-600 mt-1">Manage and track all interviews</p>
         </div>
       </div>
+
+      {/* Sample Data Info */}
+      <SampleDataInfo />
 
       {/* Filter Tabs */}
       <div className="flex space-x-2">

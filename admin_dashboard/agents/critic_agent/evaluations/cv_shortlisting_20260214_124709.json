@@ -1,0 +1,41 @@
+{
+  "evaluation_id": "cv_shortlisting_20260214_124709",
+  "agent_type": "cv_shortlisting",
+  "timestamp": "2026-02-14T12:47:09.517139",
+  "current_prompt": "You are an expert CV screening specialist with over 10 years of experience in recruitment. Your role is to review candidate resumes and match them to job requirements based on skills, experience, and qualifications.\n\nWhen evaluating candidates:\n1. Prioritize candidates whose skills closely match the required skills (70% weight)\n2. Consider years of experience and seniority level (30% weight)\n3. Look for relevant domain expertise and industry experience\n4. Assess cultural fit indicators when available\n\nScoring Guidelines:\n- Exact skill match: High priority\n- Transferable skills: Medium priority\n- Missing critical skills: Automatic rejection\n- Experience level mismatch (\u00b12 years acceptable): Lower priority\n\nAlways provide:\n- Clear reasoning for scores\n- Specific skill matches\n- Areas where candidates excel or fall short\n- Fair, unbiased evaluation based solely on qualifications\n\nBe objective, data-driven, and consistent in your evaluations.\n",
+  "improved_prompt": "See reasoning for details",
+  "evaluation_score": 5,
+  "issues_identified": [
+    "Unable to parse evaluation"
+  ],
+  "improvement_reasoning": "{\n    \"evaluation_score\": 6.5,\n    \"issues_identified\": [\n        \"Lack of explicit handling for **transferable skills** (e.g., non-technical soft skills) in junior roles\",\n        \"Weak guidance on **cultural fit assessment**\u2014no clear criteria for evaluating soft skills\",\n        \"No structured approach to **weighting domain expertise vs. general experience** for hybrid roles\",\n        \"Over-reliance on **exact skill matches** without accounting for **skill depth/quality** (e.g., '3 years of Python' vs. '5 years with advanced libraries')\",\n        \"No guardrails for **overly broad shortlists** (e.g., including candidates with marginal fit)\",\n        \"Lack of **specificity in scoring thresholds** for 'medium priority' transferable skills\",\n        \"No mention of **contextual bias mitigation** (e.g., avoiding favoritism toward certain industries/cultures)\",\n        \"No structured **feedback loop** for candidates with 'missing critical skills' (e.g., how to explain rejection clearly)\",\n        \"Weak handling of **edge cases**: e.g., candidates with 'partial matches' or 'unclear experience' claims\"\n    ],\n    \"improvement_reasoning\":\n    \"The current prompt excels at technical skill matching but fails to address critical gaps in junior roles, cultural fit, and nuanced experience evaluation. Low ratings (3.8/5) likely stem from vague guidance on transferable skills, inconsistent scoring for soft skills, and lack of clarity in handling ambiguous cases. The success rate (75%) suggests the agent is effective but could improve by adding explicit guardrails for edge cases and refining weight distribution for hybrid roles. The prompt should emphasize **data-driven soft skills assessment** and **structured rejection explanations** to align with user expectations of fairness and precision.\",\n\n    \"improved_prompt\":\n    \"You are an expert CV screening specialist with over 10 years of experience in recruitment. Your role is to review candidate resumes and match them to job requirements based on skills, experience, and qualifications. **Prioritize accuracy and fairness** in evaluations to ensure objective hiring decisions.\"",
+  "expected_improvements": [],
+  "performance_metrics": {
+    "avg_feedback_rating": 3.8,
+    "success_rate": 0.75,
+    "total_interactions": 45,
+    "input_output_pairs": [
+      {
+        "input": "Filter candidates for Senior Python Developer role",
+        "output": "Shortlisted 8 candidates out of 30 based on Python skills and 5+ years experience",
+        "rating": 4,
+        "success": true
+      },
+      {
+        "input": "Find candidates for Junior Frontend position",
+        "output": "Shortlisted 12 candidates with React/Vue experience",
+        "rating": 3,
+        "success": true
+      },
+      {
+        "input": "Screen candidates for DevOps Engineer",
+        "output": "Found 5 candidates with AWS and Docker skills",
+        "rating": 5,
+        "success": true
+      }
+    ]
+  },
+  "status": "rejected",
+  "rejected_at": "2026-02-14T12:47:37.057752",
+  "rejection_reason": "Its not correct"
+}

@@ -1,0 +1,44 @@
+{
+  "evaluation_id": "hr_chat_20260214_130247",
+  "agent_type": "hr_chat",
+  "timestamp": "2026-02-14T13:02:47.254483",
+  "current_prompt": "You are a helpful and empathetic HR assistant dedicated to supporting employees with their queries. You have access to employee databases and HR policy documents to provide accurate information.\n\nYour responsibilities:\n1. Answer questions about leave balance, leave policies, and time-off requests\n2. Explain company HR policies clearly and concisely\n3. Help employees navigate HR processes (leave applications, benefits enrollment, etc.)\n4. Maintain a professional yet friendly tone\n5. Protect employee privacy and confidential information\n\nWhen responding:\n- Be accurate: Verify information from employee database or policy documents\n- Be empathetic: Understand that HR matters can be stressful\n- Be concise: Provide clear answers without unnecessary jargon\n- Be helpful: Offer next steps or additional resources when relevant\n\nGuidelines for specific scenarios:\n- Leave balance queries: Provide exact numbers and explain accrual rules\n- Policy questions: Quote relevant policies and explain in plain language\n- Complex requests: Guide users to appropriate channels (HR manager, portal, etc.)\n\nAlways prioritize accuracy over speed. If you're unsure, acknowledge it and direct the employee to the right resource.\n",
+  "improved_prompt": "\n    \"You are a **highly empathetic and accurate** HR assistant dedicated to supporting employees with their queries. You have access to employee databases, HR policy documents, and escalation pathways to provide precise, actionable guidance while protecting confidentiality and privacy. Your responsibilities include the following, prioritized in this order: **Accuracy > Empathy > Clarity > Next Steps > Escalation**.",
+  "evaluation_score": 5,
+  "issues_identified": [
+    "JSON parsing failed - manual review recommended"
+  ],
+  "improvement_reasoning": "The LLM response could not be parsed as JSON. Raw response:\n\n{\n    \"evaluation_score\": 7.8,\n    \"issues_identified\": [\n        \"Lack of specificity in handling **remote work policy** (Interaction 2) \u2013 vague answer about '3 days per week' without context about eligibility, exceptions, or company-specific details.\",\n        \"Incomplete guidance for **parental leave application** (Interaction 3) \u2013 missing critical steps like documentation requirements, deadlines, or escalation paths for incomplete submissions.\",\n        \"No structured approach for **confiden...",
+  "expected_improvements": [
+    "Improved response quality",
+    "Better structured output"
+  ],
+  "performance_metrics": {
+    "avg_feedback_rating": 4.2,
+    "success_rate": 0.85,
+    "total_interactions": 120,
+    "input_output_pairs": [
+      {
+        "input": "What's my leave balance?",
+        "output": "You have 14 days of annual leave remaining.",
+        "rating": 5,
+        "success": true
+      },
+      {
+        "input": "What's the remote work policy?",
+        "output": "Our remote work policy allows 3 days per week...",
+        "rating": 4,
+        "success": true
+      },
+      {
+        "input": "How do I apply for parental leave?",
+        "output": "To apply for parental leave, submit a request through the HR portal...",
+        "rating": 4,
+        "success": true
+      }
+    ]
+  },
+  "status": "rejected",
+  "rejected_at": "2026-02-14T13:03:00.329234",
+  "rejection_reason": "Not accurate"
+}

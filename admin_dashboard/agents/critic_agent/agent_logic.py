@@ -212,14 +212,29 @@ Focus on addressing low-rated interactions and improving overall success rate.
             try:
                 return json.loads(message_content)
             except json.JSONDecodeError:
-                # Fallback parsing
+                # Fallback parsing - try to extract useful information
                 logger.warning("⚠️ Failed to parse JSON response, using fallback")
+                
+                # Try to extract the improved prompt from text if present
+                improved_prompt_text = message_content
+                if "improved_prompt" in message_content.lower():
+                    # Try to extract text after "improved_prompt"
+                    try:
+                        parts = message_content.split('"improved_prompt"')
+                        if len(parts) > 1:
+                            # Get text after the key
+                            after_key = parts[1].split('",')[0].strip(': "')
+                            if after_key and len(after_key) > 20:
+                                improved_prompt_text = after_key
+                    except:
+                        pass
+                
                 return {
                     "evaluation_score": 5,
-                    "issues_identified": ["Unable to parse evaluation"],
-                    "improvement_reasoning": message_content,
-                    "improved_prompt": "See reasoning for details",
-                    "expected_improvements": []
+                    "issues_identified": ["JSON parsing failed - manual review recommended"],
+                    "improvement_reasoning": f"The LLM response could not be parsed as JSON. Raw response:\n\n{message_content[:500]}...",
+                    "improved_prompt": improved_prompt_text if len(improved_prompt_text) > 20 else "Please review the improvement_reasoning field for details. Consider triggering a new evaluation.",
+                    "expected_improvements": ["Improved response quality", "Better structured output"]
                 }
     
     def _store_evaluation(

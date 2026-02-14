@@ -40,17 +40,22 @@ export default function CandidateInterview() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          interview_id: interviewData.interview.id,
+          interview_id: interviewData.interview._id,
           job_description: interviewData.job_description
         })
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to start interview');
+      }
       
       const data = await response.json();
       setCurrentResponse(data.greeting);
       setInterviewStarted(true);
       
       // Connect WebSocket
-      const websocket = new WebSocket(`ws://localhost:8004/ws/interview/${interviewData.interview.id}`);
+      const websocket = new WebSocket(`ws://localhost:8004/ws/interview/${interviewData.interview._id}`);
       
       websocket.onopen = () => {
         console.log('WebSocket connected');
@@ -79,9 +84,9 @@ export default function CandidateInterview() {
       };
       
       setWs(websocket);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to start interview:', error);
-      alert('Failed to start interview');
+      alert('Failed to start interview: ' + (error.message || 'Unknown error. Make sure the Interview Agent is running on port 8004.'));
     }
   };
   
@@ -105,7 +110,7 @@ export default function CandidateInterview() {
     }
     
     try {
-      await fetch(`http://localhost:8004/end-interview/${interviewData.interview.id}`, {
+      await fetch(`http://localhost:8004/end-interview/${interviewData.interview._id}`, {
         method: 'POST'
       });
       alert('Interview completed! Thank you.');

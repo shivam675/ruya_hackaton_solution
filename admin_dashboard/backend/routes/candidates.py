@@ -53,7 +53,7 @@ async def fetch_candidates_from_cv_agent(
         logger.info(f"🚀 Starting CV shortlisting process for job: {job_id}")
         
         # Call CV agent - this triggers the full 2-phase shortlisting process
-        result = cv_agent.shortlist_candidates(job_id)
+        result = await cv_agent.shortlist_candidates_async(job_id)
         
         logger.info(f"✅ CV Agent completed: {result.get('shortlisted_count', 0)} candidates shortlisted")
         

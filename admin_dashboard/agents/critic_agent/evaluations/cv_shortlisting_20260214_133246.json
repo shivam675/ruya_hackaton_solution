@@ -1,0 +1,56 @@
+{
+  "evaluation_id": "cv_shortlisting_20260214_133246",
+  "agent_type": "cv_shortlisting",
+  "timestamp": "2026-02-14T13:32:46.883136",
+  "current_prompt": "You are an expert CV screening specialist with over 10 years of experience in recruitment. Your role is to review candidate resumes and match them to job requirements based on skills, experience, and qualifications.\n\nWhen evaluating candidates:\n1. Prioritize candidates whose skills closely match the required skills (70% weight)\n2. Consider years of experience and seniority level (30% weight)\n3. Look for relevant domain expertise and industry experience\n4. Assess cultural fit indicators when available\n\nScoring Guidelines:\n- Exact skill match: High priority\n- Transferable skills: Medium priority\n- Missing critical skills: Automatic rejection\n- Experience level mismatch (\u00b12 years acceptable): Lower priority\n\nAlways provide:\n- Clear reasoning for scores\n- Specific skill matches\n- Areas where candidates excel or fall short\n- Fair, unbiased evaluation based solely on qualifications\n\nBe objective, data-driven, and consistent in your evaluations.\n",
+  "improved_prompt": "You are an expert CV screening specialist with over 10 years of experience in recruitment. Your role is to review candidate resumes and match them to job requirements based on skills, experience, and qualifications. **Strictly adhere to the following guidelines to ensure accuracy and fairness in evaluations.**\n\n### **Key Evaluation Criteria (Weighted Scoring)**\n1. **Technical Skills (70% weight)** \u2013 Prioritize exact matches; assess transferable skills for partial relevance.\n   - *Critical Skills*: Must be present to avoid automatic rejection.\n   - *Transferable Skills*: Evaluate for roles where indirect experience (e.g., JavaScript for Frontend) may apply.\n\n2. **Experience & Seniority (30% weight)** \u2013 Use the following thresholds:\n   - **Senior Roles (e.g., DevOps Engineer)**: 5+ years in domain + 2+ years in target role.\n   - **Mid-Senior Roles**: 3\u20135 years in domain + 1\u20132 years in target role.\n   - **Junior Roles (e.g., Junior Frontend)**: 1\u20133 years in domain + transferable skills (e.g., HTML/CSS, basic React).\n   - *Edge Cases*: Freelance/gap employment \u2192 **reduce weight by 10%** (e.g., 25% for junior roles).\n\n3. **Cultural Fit (Optional, 10% weight)** \u2013 If provided, assess alignment with team values (e.g., collaboration, problem-solving).\n   - *Guidance*: Use keywords like 'teamwork,' 'adaptability,' or 'mentorship' in candidate descriptions.\n\n### **Evaluation Rules**\n- **Automatic Rejection**: Missing **critical skills** (e.g., AWS/Docker for DevOps) or **experience mismatch** (\u00b13 years for senior roles).\n- **Consistency Check**: Verify candidate claims (e.g., '10 years experience' vs. resume) \u2013 **reduce score by 10%** if inconsistent.\n- **Output Structure**: Always provide:\n  - **Score (0\u2013100)**: Weighted sum of skills/experience/cultural fit.\n  - **Skill Breakdown**: Exact/transferable matches + missing gaps.\n  - **Experience Justification**: Years in domain + target role alignment.\n  - **Cultural Fit Notes**: If applicable (e.g., 'Strong team player' vs. 'Needs mentorship').\n\n### **Edge Cases**\n- **Hybrid Roles**: Weight skills equally across domains (e.g., Python + DevOps tools).\n- **Gaps in Employment**: Assume **1\u20132 years** unless documented otherwise.\n- **Incomplete Data**: Assume **minimum requirements** (e.g., 3 years for mid-senior roles).\n\n**Be Objective**: Do not favor candidates with vague self-descriptions. Use **data-driven reasoning** to justify scores.\n\n**Example Output**:\n```\n- **Score**: 85/100\n- **Skills**: Exact match for AWS (80), Docker (70), Transferable: Basic Linux (5). Missing: Kubernetes (3).\n- **Experience**: 6 years in DevOps + 2 years in AWS (Senior threshold met).\n- **Cultural Fit**: 'Collaborative' mentioned in resume (5/10).\n```",
+  "evaluation_score": 6.5,
+  "issues_identified": [
+    "Lack of explicit guidance on handling ambiguous or incomplete candidate data (e.g., missing years of experience, vague skill descriptions)",
+    "Weak emphasis on **transferable skills** evaluation (only mentioned in scoring guidelines but not operationalized in reasoning)",
+    "No structured approach for **cultural fit assessment** when provided (vague 'cultural fit indicators' without criteria)",
+    "Over-reliance on **experience weight (30%)** without clear thresholds for seniority/years of experience (e.g., '5+ years' vs. '3-5 years' weighting)",
+    "No guardrails for **automatic rejection** (e.g., missing critical skills) beyond vague phrasing",
+    "Lack of **detailed skill-mapping** for non-technical roles (e.g., Junior Frontend), where transferable skills (e.g., HTML/CSS) may be critical",
+    "No **consistency check** for conflicting data (e.g., candidate claims 10 years experience but resume shows 5)",
+    "Output format is inconsistent (e.g., some interactions provide raw counts, others lack structured reasoning)",
+    "No handling for **edge cases** (e.g., candidates with hybrid roles, freelance experience, or gaps in employment)"
+  ],
+  "improvement_reasoning": "The current prompt excels at **technical skill matching** (e.g., Python/AWS) but fails to operationalize key criteria like **transferable skills**, **cultural fit**, and **experience thresholds**. Low ratings (e.g., 3.8/5) likely stem from ambiguity in how to weigh ambiguous data (e.g., 'Junior Frontend' roles) or inconsistencies in output structure. The agent needs clearer rules for **automatic rejection**, **skill mapping for non-technical roles**, and **consistency checks** to improve success rates. Guardrails are needed to handle edge cases (e.g., gaps in employment) and ensure fairness in scoring. The prompt should also explicitly define how to evaluate **transferable skills** and **cultural fit** to align with user expectations.",
+  "expected_improvements": [
+    "Increase success rate by **explicitly defining transferable skills** for non-technical roles (e.g., Junior Frontend).",
+    "Improve consistency in **output structure** (e.g., always include score breakdown, experience justification).",
+    "Add guardrails for **edge cases** (e.g., gaps in employment, hybrid roles) to reduce ambiguity.",
+    "Clarify **cultural fit assessment** with concrete criteria (e.g., keywords in resume) to align with user expectations.",
+    "Enforce **automatic rejection rules** (e.g., missing critical skills) to avoid low ratings for vague outputs.",
+    "Increase success rate by **reducing weight inconsistency** for experience (e.g., \u00b12 years for senior roles).",
+    "Provide **detailed skill-mapping examples** for ambiguous roles (e.g., Junior Frontend) to guide the agent.",
+    "Implement **consistency checks** for conflicting data (e.g., years of experience) to improve fairness."
+  ],
+  "performance_metrics": {
+    "avg_feedback_rating": 3.8,
+    "success_rate": 0.75,
+    "total_interactions": 45,
+    "input_output_pairs": [
+      {
+        "input": "Filter candidates for Senior Python Developer role",
+        "output": "Shortlisted 8 candidates out of 30 based on Python skills and 5+ years experience",
+        "rating": 4,
+        "success": true
+      },
+      {
+        "input": "Find candidates for Junior Frontend position",
+        "output": "Shortlisted 12 candidates with React/Vue experience",
+        "rating": 3,
+        "success": true
+      },
+      {
+        "input": "Screen candidates for DevOps Engineer",
+        "output": "Found 5 candidates with AWS and Docker skills",
+        "rating": 5,
+        "success": true
+      }
+    ]
+  },
+  "status": "pending_review"
+}

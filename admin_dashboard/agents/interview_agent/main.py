@@ -165,6 +165,8 @@ async def interview_websocket(websocket: WebSocket, interview_id: str):
     await websocket.accept()
     logger.info(f"🔌 WebSocket connected for interview: {interview_id}")
     
+    connection_closed = False
+    
     try:
         # Send initial greeting
         status = interview_controller.get_interview_status(interview_id)
@@ -174,6 +176,7 @@ async def interview_websocket(websocket: WebSocket, interview_id: str):
                 "data": "Interview not found. Please start interview first."
             })
             await websocket.close()
+            connection_closed = True
             return
         
         # WebSocket message handling loop
@@ -249,7 +252,11 @@ async def interview_websocket(websocket: WebSocket, interview_id: str):
                 })
     
     finally:
-        await websocket.close()
+        if not connection_closed:
+            try:
+                await websocket.close()
+            except RuntimeError:
+                pass  # Already closed
         logger.info(f"🔌 WebSocket closed: {interview_id}")
 
 

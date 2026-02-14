@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { MessageCircle, X, Send, Minimize2, Maximize2, Loader2 } from 'lucide-react';
 import { hrChatAPI } from '@/lib/api';
+import MarkdownRenderer from '@/components/MarkdownRenderer';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -133,7 +134,11 @@ export default function HRChatBubble() {
                         : 'bg-gray-100 text-gray-900'
                     }`}
                   >
-                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                    {message.role === 'user' ? (
+                      <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                    ) : (
+                      <MarkdownRenderer content={message.content} />
+                    )}
                     <span className="text-xs opacity-70 mt-1 block">
                       {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>

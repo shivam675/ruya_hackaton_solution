@@ -40,7 +40,7 @@ class JobPosting(JobPostingBase):
     id: str = Field(alias="_id")
     is_active: bool = True
     created_at: datetime
-    created_by: str  # User ID
+    created_by: Optional[str] = "system"  # User ID
     candidates_count: int = 0
     
     class Config:

@@ -34,6 +34,12 @@ if errorlevel 1 (
     echo Or use Docker: docker run -d -p 27017:27017 mongo:7
     pause
 )
+
+REM Create MongoDB data directory if it doesn't exist
+if not exist "E:\ruya_hackaton_solution\admin_dashboard\data\db" (
+    echo Creating MongoDB data directory...
+    mkdir "E:\ruya_hackaton_solution\admin_dashboard\data\db"
+)
 echo.
 
 REM Check Ollama
@@ -64,8 +70,14 @@ echo [5/5] Starting all services...
 echo.
 
 echo Starting MongoDB (if not already running)...
-start "MongoDB" cmd /k "mongod --dbpath E:\ruya_hackaton_solution\admin_dashboard\data\db"
-timeout /t 3 /nobreak >nul
+netstat -an | findstr ":27017" >nul
+if errorlevel 1 (
+    start "MongoDB" cmd /k "mongod --dbpath E:\ruya_hackaton_solution\admin_dashboard\data\db"
+    echo MongoDB starting... (waiting 5 seconds)
+    timeout /t 5 /nobreak >nul
+) else (
+    echo MongoDB already running on port 27017
+)
 
 echo Starting Backend (Port 8001) with integrated CV & HR Chat agents...
 start "Backend" cmd /k "cd backend && E:\ruya_hackaton_solution\env\Scripts\activate.bat && uvicorn main:app --host 0.0.0.0 --port 8001 --reload"
@@ -75,9 +87,9 @@ echo Starting Email Agent (Port 8003)...
 start "Email Agent" cmd /k "cd agents\email_scheduling_agent && E:\ruya_hackaton_solution\env\Scripts\activate.bat && python main.py"
 timeout /t 2 /nobreak >nul
 
-echo Starting Interview Agent (Port 8004)...
-start "Interview Agent" cmd /k "cd agents\interview_agent && E:\audio_jam\env\Scripts\activate.bat && python main.py"
-timeout /t 2 /nobreak >nul
+@REM echo Starting Interview Agent (Port 8004)...
+@REM start "Interview Agent" cmd /k "cd agents\interview_agent && E:\audio_jam\env\Scripts\activate.bat && python main.py"
+@REM timeout /t 2 /nobreak >nul
 
 echo Starting Frontend (Port 5173)...
 start "Frontend" cmd /k "cd frontend && npm run dev"

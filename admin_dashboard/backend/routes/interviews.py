@@ -69,12 +69,12 @@ async def create_interview(
     return Interview(**interview_doc)
 
 
-@router.get("", response_model=List[Interview])
+@router.get("")
 async def get_interviews(
     job_posting_id: Optional[str] = None,
     status_filter: Optional[InterviewStatus] = None
 ):
-    """Get interviews"""
+    """Get interviews with enriched candidate and job data"""
     db = get_db()
     
     query = {}
@@ -87,13 +87,31 @@ async def get_interviews(
         query["status"] = status_filter
     
     cursor = db.interviews.find(query).sort("created_at", -1)
-    interviews = []
+    enriched_interviews = []
     
     async for doc in cursor:
         doc["_id"] = str(doc["_id"])
-        interviews.append(Interview(**doc))
+        
+        # Enrich with candidate info
+        if ObjectId.is_valid(doc.get("candidate_id")):
+            candidate = await db.candidates.find_one({"_id": ObjectId(doc["candidate_id"])})
+            if candidate:
+                doc["candidate_name"] = candidate.get("name")
+                doc["candidate_email"] = candidate.get("email")
+        
+        # Enrich with job posting info
+        if ObjectId.is_valid(doc.get("job_posting_id")):
+            job = await db.job_postings.find_one({"_id": ObjectId(doc["job_posting_id"])})
+            if job:
+                doc["job_title"] = job.get("title")
+        
+        # Ensure interview_type is set
+        if "interview_type" not in doc or not doc["interview_type"]:
+            doc["interview_type"] = "AI Interview"
+        
+        enriched_interviews.append(doc)
     
-    return interviews
+    return enriched_interviews
 
 
 @router.get("/{interview_id}", response_model=Interview)
@@ -183,7 +201,7 @@ async def authenticate_candidate_for_interview(auth_data: CandidateInterviewAuth
     # Find candidate by name (case-insensitive)
     candidate = await db.candidates.find_one({
         "name": {"$regex": f"^{auth_data.name}$", "$options": "i"},
-        "status": {"$in": [CandidateStatus.SCHEDULED, CandidateStatus.EMAIL_SENT, CandidateStatus.APPROVED]}
+        "status": {"$in": ["scheduled", "email_sent", "approved"]}
     })
     
     if not candidate:
@@ -195,7 +213,7 @@ async def authenticate_candidate_for_interview(auth_data: CandidateInterviewAuth
     # Get interview
     interview = await db.interviews.find_one({
         "candidate_id": str(candidate["_id"]),
-        "status": {"$in": [InterviewStatus.SCHEDULED, InterviewStatus.IN_PROGRESS]}
+        "status": {"$in": ["scheduled", "in_progress"]}
     })
     
     if not interview:

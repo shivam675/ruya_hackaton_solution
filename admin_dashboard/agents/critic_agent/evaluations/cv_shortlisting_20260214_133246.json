@@ -52,5 +52,6 @@
       }
     ]
   },
-  "status": "pending_review"
+  "status": "approved",
+  "approved_at": "2026-02-14T15:14:47.076913"
 }
